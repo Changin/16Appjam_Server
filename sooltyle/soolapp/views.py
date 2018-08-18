@@ -2,19 +2,35 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 import json
 from django.http import HttpResponse
-from .models import SoolGame,Recipes,Users
+from .models import SoolGame,Recipes,Users,Tip
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def boardList(request,type):
 	if(type=='0'):		#SoolGame
-		list = SoolGame.objects.order_by('-pub_date')
+		list = SoolGame.objects.order_by('TITLE')
 	elif(type=='1'):	#Recipes
-		list = Recipes.objects.order_by('-pub_date')
-	else:
-		list = Users.objects.order_by('-pub_date')
+		list = Recipes.objects.order_by('TITLE')
+	else:				#Tip
+		list = Tip.objects.order_by('TITLE')
 
-	return JsonResponse(list)
+	records = []
+	for tmp in list:
+		title = tmp.TITLE
+		like = tmp.LIKE
+		context = tmp.CONTEXT
+		uploader = tmp.UPLOADER
+		photo = tmp.PHOTO
+		record = {
+			'title':title,
+			'like':like,
+			'context':context,
+			'uploader':uploader,
+			'photo':photo,
+		}
+		records.append(record)
+
+	return HttpResponse(records,content_type="application/json")
 
 @csrf_exempt
 def register(request,id,pw,name):	#register
