@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404,get
-from django.utils import simplejson
+from django.shortcuts import render, get_object_or_404
+#from django.utils import simplejson
+import json
 from django.http import HttpResponse
 from .models import SoolGame,Recipes,Users
 
@@ -9,7 +10,7 @@ def register(request,id,pw,name):
 		user_id = Users.objects.get(USER_ID=id)
 
 	except ObjectDoesNotExist:
-		
+		return 1
 
 def login(request,id,pw):
 	#login
