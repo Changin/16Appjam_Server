@@ -8,29 +8,22 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def boardList(request,type):
 	if(type=='0'):		#SoolGame
-		list = SoolGame.objects.order_by('TITLE')
+		list = SoolGame.objects.order_by('-id')
 	elif(type=='1'):	#Recipes
-		list = Recipes.objects.order_by('TITLE')
+		list = Recipes.objects.order_by('-id')
 	else:				#Tip
-		list = Tip.objects.order_by('TITLE')
+		list = Tip.objects.order_by('-id')
 
 	records = []
 	for tmp in list:
-		title = tmp.TITLE
-		like = tmp.LIKE
-		context = tmp.CONTEXT
-		uploader = tmp.UPLOADER
-		photo = tmp.PHOTO
-		record = {
-			'title':title,
-			'like':like,
-			'context':context,
-			'uploader':uploader,
-			'photo':photo,
-		}
-		records.append(record)
-
-	return HttpResponse(records,content_type="application/json")
+		records.append({
+			'title': tmp.TITLE,
+			'like': tmp.LIKE,
+			'context': tmp.CONTEXT,
+			'uploader': tmp.UPLOADER,
+			'photo': tmp.PHOTO,
+		})
+	return JsonResponse(records, safe=False)
 
 @csrf_exempt
 def register(request,id,pw,name):	#register
