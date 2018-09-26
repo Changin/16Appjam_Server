@@ -25,7 +25,7 @@ SECRET_KEY = '&s8ttixv^i7+2pmkru42hwx2&b+ime5o^ugltgb0b4#-05+@ay'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['13.125.221.127','0.0.0.0','127.0.0.1','13.209.171.180']
+ALLOWED_HOSTS = ['13.125.221.127','0.0.0.0','127.0.0.1','13.209.171.180','changin.unifox.kr']
 
 
 # Application definition
