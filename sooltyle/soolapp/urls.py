@@ -13,11 +13,17 @@ app_name = 'soolapp'
 router = routers.DefaultRouter()
 router.register('soolgames', soolapp.api.SoolGameViewSet)
 router.register('recipes', soolapp.api.RecipesViewSet)
+router.register('tips',soolapp.api.TipViewSet)
 
 urlpatterns = [
-    path('register/<id>/<pw>/<name>', views.register, name='register'),
-    path('login/<id>/<pw>',views.login, name='login'),
-    path('logout/',views.logout, name='logout'),
-    path('api/doc/',get_swagger_view(title='Rest API Document')),
-    path('api/',include((router.urls, app_name),namespace='api')),
+	path('rest-auth/',include('rest_auth.urls')),
+	path('rest-auth/registration',include('rest_auth.registration.urls')),
+	path('users/', include('users.urls')),
+    path('doc/',get_swagger_view(title='Rest API Document')),
+    path('board/',include((router.urls, app_name),namespace='api')),
 ]
+'''
+    path('signup/', views.signup, name='signup'),
+    path('login/',views.login, name='login'),
+    path('logout/',views.logout, name='logout'),
+'''
