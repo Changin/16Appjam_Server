@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, nickname, password=None):
+    def _create_user(self, email, nickname, password, **extra_fields):
         """
         주어진 이메일, 닉네임, 비밀번호 등 개인정보로 User 인스턴스 생성
         """
@@ -17,11 +17,18 @@ class UserManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             nickname=nickname,
+            is_active=True,
+            date_joined=now,
+            **extra_fields
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
+
+    def create_user(self, nickname, email=None, password=None, **extra_fields):
+        return self._create_user(email, nickname, password,
+                 **extra_fields)
 
     def create_superuser(self, email, nickname, password):
         """

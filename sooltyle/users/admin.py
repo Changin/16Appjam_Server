@@ -21,15 +21,14 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         (_('Personal info'), {'fields': ('nickname', )}),
-        (_('Permissions'), {'fields': ('is_active', 'is_superuser',)}),
-    )
+        (_('Permissions'), {'fields': ('is_active', 'is_superuser',)}),     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
             'fields': ('email', 'nickname', 'password1', 'password2')}
-         ),
+        ),
     )
     search_fields = ('email','nickname')
     ordering = ('-date_joined',)
@@ -37,4 +36,4 @@ class UserAdmin(BaseUserAdmin):
 
 
 # Now register the new UserAdmin...
-admin.site.register(User, UserAdmin)
+admin.site.register(User, UserAdmin) 

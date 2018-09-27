@@ -25,7 +25,7 @@ SECRET_KEY = '&s8ttixv^i7+2pmkru42hwx2&b+ime5o^ugltgb0b4#-05+@ay'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['13.125.221.127','0.0.0.0','127.0.0.1']
+ALLOWED_HOSTS = ['13.125.221.127','0.0.0.0','127.0.0.1','13.209.171.180','changin.unifox.kr']
 
 
 # Application definition
@@ -37,15 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework_swagger',
-    'rest_framework.authtoken',
     'rest_framework',
+    'rest_framework_swagger',
+    'soolapp',
+    'rest_framework.authtoken',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'rest_auth.registration',
     'rest_auth',
-    'soolapp',
     'users',
 ]
 
@@ -128,9 +128,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 AUTH_USER_MODEL = 'users.User'
 REST_AUTH_SERIALIZERS = { 'USER_DETAILS_SERIALIZER':'users.serializers.UserSerializer' }
+REST_AUTH_REGISTER_SERIALIZERS = {
+        'REGISTER_SERIALIZER': 'users.serializers.RegisterSerializer',
+}
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
@@ -138,5 +142,11 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_VERIFICATION = None
+AUTH_USER_MODEL = 'users.User'
+REST_AUTH_SERIALIZERS = { 'USER_DETAILS_SERIALIZER':'users.serializers.UserSerializer' }
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SITE_ID = 1
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

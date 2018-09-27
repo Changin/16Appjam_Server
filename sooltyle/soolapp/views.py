@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.models import User
-from django.contrib.auth import login
 from django.http import JsonResponse
 import json
 from django.http import HttpResponse
 from .models import SoolGame,Recipes,Tip
+from django.contrib.auth.models import User
+from django.contrib.auth import login
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
 
@@ -30,48 +30,3 @@ def signup(request):	#회원가입
 			'status':'1'
 		}
 		return JsonResponse(register_data)
-
-def login(request):
-	mail = request.POST['email']
-	token = Token.objects.create(email=mail)
-	print (token.key)
-
-def logout(request):
-	pass
-'''
-@csrf_exempt
-def register(request):	#register
-	#register
-	try:
-		user_id = Users.objects.get(USER_ID=id)
-		register_data = {
-			'status':'0'	#id already taken!
-		}
-		return JsonResponse(register_data)
-
-	except:
-		user = Users(USER_ID=id,USER_PW=pw,USER_NAME=name)
-		user.save()
-		register_data = {
-			'status':'1'
-		}
-		return JsonResponse(register_data)
-
-@csrf_exempt
-def login(request,id,pw):			#login
-	#login
-	try:
-		user_id = Users.objects.get(USER_ID=id)
-		user_pw = Users.objects.get(USER_PW=pw)
-
-		login_data = {
-			'status':'1',
-		}
-
-	except:
-		login_data = {
-			'status':'0',
-		}
-
-	return JsonResponse(login_data)
-'''
