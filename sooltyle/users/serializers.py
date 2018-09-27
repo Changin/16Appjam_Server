@@ -34,9 +34,6 @@ class RegisterSerializer(serializers.Serializer):
                 _("The two password fields didn't match."))
         return data
 
-    def custom_signup(self, request, user):
-        pass
-
     def get_cleaned_data(self):
         return {
             'nickname': self.validated_data.get('nickname', ''),
@@ -49,6 +46,8 @@ class RegisterSerializer(serializers.Serializer):
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
         adapter.save_user(request, user, self)
-        self.custom_signup(request, user)
         setup_user_email(request, user, [])
+
+        user.nickname = self.cleaned_data.get('nickname')
+        user.save()
         return user

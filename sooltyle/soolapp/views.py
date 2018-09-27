@@ -30,14 +30,6 @@ def signup(request):	#회원가입
 			'status':'1'
 		}
 		return JsonResponse(register_data)
-
-def login(request):
-	mail = request.POST['email']
-	token = Token.objects.create(email=mail)
-	print (token.key)
-
-def logout(request):
-	pass
 '''
 @csrf_exempt
 def register(request):	#register

@@ -206,6 +206,7 @@ POST 방식으로 요청해야 한다.
 * http://서버주소/api/rest-auth/registration/
 
 회원가입 메소드를 실행한다.
+POST로 회원가입 정보(username)
 
 ### 1.4 rest api : users
 > **회원 정보를 불러올 수 있는 api이다.**
